@@ -126,8 +126,19 @@
         </div>
       </div>
       <div class="about-img-wrap">
-        <div class="about-avatar">
-          <div class="about-avatar-inner">⚙️</div>
+        <div class="about-canvas-card" id="about-3d-card" onclick="switch3DModule()" title="Click to switch 3D Module">
+          <canvas id="about-3d-canvas"></canvas>
+          <div class="about-3d-badge">
+            <span class="badge-dot" id="about-badge-dot"></span>
+            <span id="about-badge-text" data-i18n="mod_scada">Lõi SCADA 3D · Real-time</span>
+            <span class="badge-switch-hint">↻</span>
+          </div>
+          <div class="about-3d-dots" id="about-3d-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -188,7 +199,7 @@
         <div class="term-dot"></div>
         <div class="term-dot"></div>
         <div class="term-dot"></div>
-        <span class="term-title">bach@sti-dev ~ %</span>
+        <span class="term-title">bach@dev ~ %</span>
       </div>
       <div class="term-body" id="termBody">
         <div class="term-line" data-i18n="term_welcome">Welcome to Nguyễn Đình Bách (BackDEV)'s industrial terminal.</div>
