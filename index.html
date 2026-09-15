@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Nguyễn Đình Bách | Full Stack Developer</title>
+  <meta name="description"
+    content="Nguyễn Đình Bách (BackDEV) – Full Stack Developer. Chuyên sâu kiến trúc Microservices, Smart Factory (MES / OEE), trực quan hóa dữ liệu SCADA 3D WebGL và IoT Real-time." />
+  <meta name="keywords" content="Nguyễn Đình Bách, BackDEV, BackSoftDEV, Full Stack Developer, Industrial Software, MES, OEE, SCADA 3D, Three.js, React, Node.js, Microservices" />
+  <meta property="og:title" content="Nguyễn Đình Bách | Full Stack Developer" />
+  <meta property="og:description"
+    content="Kỹ sư phát triển phần mềm Full Stack chuyên sâu giải pháp công nghiệp thông minh Smart Factory / MES / OEE / SCADA 3D và kiến trúc Microservices." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="canonical" href="https://github.com/BackSoftDEV" />
+  <meta name="author" content="Nguyễn Đình Bách" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div id="loader-name">
+      <span>B</span><span>A</span><span>C</span><span>K</span><span>&nbsp;</span><span>D</span><span>E</span><span>V</span>
+    </div>
+    <div id="loader-bar-wrap">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-pct">Loading...</div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-close" id="mobileClose">✕</span>
+    <a href="#about" onclick="closeMobile()" data-i18n="nav_about">About</a>
+    <a href="#skills" onclick="closeMobile()" data-i18n="nav_skills">Skills</a>
+    <a href="#projects" onclick="closeMobile()" data-i18n="nav_projects">Projects</a>
+    <a href="#terminal-section" onclick="closeMobile()" data-i18n="nav_terminal">Terminal</a>
+    <a href="#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="logo">&lt;BackDEV /&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#terminal-section" data-i18n="nav_terminal">Terminal</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <select id="lang-select" onchange="changeLanguage(this.value)" aria-label="Select Language">
+        <option value="vi">🇻🇳 VI</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="ja">🇯🇵 JA</option>
+        <option value="zh">🇨🇳 ZH</option>
+      </select>
+      <button id="theme-toggle" onclick="toggleTheme()">☀ Light</button>
+      <div class="burger" id="burgerBtn">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div id="hero">
+    <canvas id="star-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="hero_badge">💻 &nbsp;Full Stack Developer</div>
+      <h1 class="hero-name">
+        <span>Nguyễn Đình</span><br><span class="last">Bách</span>
+      </h1>
+      <div class="typing-wrap">
+        <span id="typing-text"></span><span id="typing-cursor"></span>
+      </div>
+      <p class="hero-bio" data-i18n="hero_bio">Kỹ sư phát triển phần mềm Full Stack. Chuyên sâu kiến trúc Microservices, giải pháp Smart Factory (MES / OEE / SCADA), xử lý dữ liệu thời gian thực và mô phỏng 3D WebGL với Three.js.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary" data-i18n="btn_projects">View Projects</a>
+        <a href="https://github.com/BackSoftDEV" target="_blank" class="btn-ghost" data-i18n="btn_github">GitHub Profile</a>
+        <a href="#contact" class="btn-ghost" data-i18n="btn_contact">Contact Me</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-dot"></div>
+      <span
+        style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;color:var(--muted)">SCROLL</span>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section id="about" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="about_label">// 01 · About</div>
+      <h2 class="section-title" data-i18n="about_title">Who I Am</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p class="about-bio" data-i18n="about_quote">"Tôi thiết kế <strong>kiến trúc Microservices & Monorepo</strong>, làm chủ <strong>dữ liệu thời gian thực (IoT, Socket.IO, gRPC)</strong> và trực quan hóa nhà xưởng thông minh <strong>SCADA 3D với Three.js</strong>."</p>
+        <p class="about-bio" style="margin-top:1rem" data-i18n="about_p1">Tôi chịu trách nhiệm chính về kiến trúc và phát triển các hệ thống số hóa sản xuất quy mô lớn cho các đối tác công nghiệp hàng đầu như Fujikin Thăng Long, Meiko, Gunze...</p>
+        <p class="about-bio" style="margin-top:1rem" data-i18n="about_p2">Định hướng kỹ thuật tập trung vào hiệu năng cao, tối ưu hóa bộ nhớ đệm (Redis, IndexedDB), khả năng mở rộng linh hoạt của dịch vụ và đem đến trải nghiệm người dùng trực quan, chính xác cho hệ thống điều hành sản xuất.</p>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">2+</div>
+            <div class="stat-label" data-i18n="stat_exp">Years Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">6+</div>
+            <div class="stat-label" data-i18n="stat_proj">Industrial Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">20+</div>
+            <div class="stat-label" data-i18n="stat_tech">Core Technologies</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-img-wrap">
+        <div class="about-avatar">
+          <div class="about-avatar-inner">⚙️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="skills_label">// 02 · Skills</div>
+      <h2 class="section-title" data-i18n="skills_title">Tech Arsenal</h2>
+      <div class="section-line"></div>
+    </div>
+    <div id="globe-wrap" class="reveal">
+      <canvas id="globe-canvas" width="300" height="300"></canvas>
+    </div>
+    <div class="skills-grid reveal" id="skillsGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="proj_label">// 03 · Projects</div>
+      <h2 class="section-title" data-i18n="proj_title">Industrial & Core Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- Scroll Story -->
+  <section id="story" style="max-width:900px;margin:0 auto">
+    <div class="story-block">
+      <p class="story-text" data-i18n="story_1">Tôi không chỉ viết mã nguồn —<br>Tôi kiến tạo <em>giải pháp số hóa công nghiệp</em>.</p>
+    </div>
+    <div class="story-block">
+      <p class="story-text" data-i18n="story_2">Mỗi kiến trúc là một cam kết hiệu năng.<br>Mỗi dòng lệnh là một <em>chuẩn mực tin cậy</em>.</p>
+    </div>
+    <div class="story-block">
+      <p class="story-text" data-i18n="story_3">Từ <em>Microservices & Telemetry</em> đến không gian SCADA 3D,<br>tôi xây dựng hệ thống bền vững theo thời gian.</p>
+    </div>
+    <div class="story-block">
+      <p class="story-text" data-i18n="story_4">Tương lai của nhà máy thông minh<br>được tạo dựng từ <em>kỹ thuật xuất sắc</em>.</p>
+    </div>
+  </section>
+
+  <!-- Terminal -->
+  <section id="terminal-section" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="term_label">// 04 · Terminal</div>
+      <h2 class="section-title" data-i18n="term_title">Interactive Shell</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="terminal reveal">
+      <div class="term-header">
+        <div class="term-dot"></div>
+        <div class="term-dot"></div>
+        <div class="term-dot"></div>
+        <span class="term-title">bach@sti-dev ~ %</span>
+      </div>
+      <div class="term-body" id="termBody">
+        <div class="term-line" data-i18n="term_welcome">Welcome to Nguyễn Đình Bách (BackDEV)'s industrial terminal.</div>
+        <div class="term-help" data-i18n="term_help">Type a command: <span style="color:var(--neon)">about</span> · <span
+            style="color:var(--neon)">skills</span> · <span style="color:var(--neon)">projects</span> · <span
+            style="color:var(--neon)">contact</span> · <span style="color:var(--neon)">clear</span></div>
+        <div class="term-input-line">
+          <span class="term-prompt">$</span>
+          <input type="text" id="term-input" placeholder="Enter command..." data-i18n-ph="term_input_ph" autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Chat -->
+  <section id="ai-section" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="ai_label">// 05 · AI Assistant</div>
+      <h2 class="section-title" data-i18n="ai_title">Ask About Bách</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="chat-wrap reveal">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div class="chat-name">BackDEV AI Assistant</div>
+          <div class="chat-status" data-i18n="ai_status">Online · Industrial & Full Stack Profile</div>
+        </div>
+      </div>
+      <div class="quick-chips">
+        <span class="qchip" onclick="sendQuickByRole('skills')" data-i18n="qchip_skills">🧠 Kỹ năng</span>
+        <span class="qchip" onclick="sendQuickByRole('projects')" data-i18n="qchip_projects">🏭 Dự án (MES/OEE/SCADA)</span>
+        <span class="qchip" onclick="sendQuickByRole('experience')" data-i18n="qchip_exp">💼 Kinh nghiệm làm việc</span>
+        <span class="qchip" onclick="sendQuickByRole('contact')" data-i18n="qchip_contact">🚀 Liên hệ</span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot" data-i18n="ai_welcome">👋 Xin chào! Tôi là trợ lý AI của Nguyễn Đình Bách (BackDEV). Hãy hỏi tôi bất kỳ thông tin nào về kiến trúc Microservices, dự án Smart Factory (MES / OEE / SCADA 3D), hoặc kinh nghiệm phát triển phần mềm Full Stack!</div>
+      </div>
+      <div class="chat-input-wrap">
+        <input type="text" id="chat-input" placeholder="Hỏi về Bách (kỹ năng, dự án SCADA, Microservices)..."
+          data-i18n-ph="ai_input_ph" onkeydown="if(event.key==='Enter')sendChat()" />
+        <button id="chat-send" onclick="sendChat()" data-i18n="ai_send">Send →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="max-width:1200px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-label" data-i18n="contact_label">// 06 · Contact</div>
+      <h2 class="section-title" data-i18n="contact_title">Let's Connect</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-form">
+        <div class="form-group">
+          <label data-i18n="form_name_lbl">Họ và tên</label>
+          <input type="text" id="fname" placeholder="Họ tên của bạn" data-i18n-ph="form_name_ph" />
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_email_lbl">Email</label>
+          <input type="email" id="femail" placeholder="email@example.com" data-i18n-ph="form_email_ph" />
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_msg_lbl">Nội dung</label>
+          <textarea id="fmsg" placeholder="Mô tả dự án hoặc nội dung trao đổi..." data-i18n-ph="form_msg_ph"></textarea>
+        </div>
+        <button class="btn-submit" onclick="submitForm()"><span data-i18n="form_btn">Gửi Tin Nhắn ✦</span></button>
+      </div>
+      <div class="contact-info">
+        <h3 data-i18n="contact_heading">Hợp Tác & Phát Triển</h3>
+        <p data-i18n="contact_p">Tôi luôn sẵn sàng trao đổi về các giải pháp chuyển đổi số công nghiệp thông minh (Smart Factory / MES / OEE / SCADA 3D), kiến trúc Microservices và cơ hội hợp tác kỹ thuật.</p>
+        <div class="social-links">
+          <a href="https://github.com/BackSoftDEV" target="_blank" class="social-link">
+            <div class="social-icon">⚡</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;color:var(--text)">GitHub</div>
+              <div style="font-size:.78rem">github.com/BackSoftDEV</div>
+            </div>
+          </a>
+          <a href="mailto:nguyendinhbach99@gmail.com" class="social-link">
+            <div class="social-icon">📧</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;color:var(--text)">Email</div>
+              <div style="font-size:.78rem">nguyendinhbach99@gmail.com</div>
+            </div>
+          </a>
+          <div class="social-link" style="cursor:default">
+            <div class="social-icon">💼</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;color:var(--text)" data-i18n="contact_role_lbl">Chuyên môn</div>
+              <div style="font-size:.78rem" data-i18n="contact_role_val">Full Stack Developer</div>
+            </div>
+          </div>
+          <div class="social-link" style="cursor:default">
+            <div class="social-icon">📍</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;color:var(--text)" data-i18n="contact_loc_lbl">Vị trí</div>
+              <div style="font-size:.78rem" data-i18n="contact_loc_val">Hà Nội, Việt Nam</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-i18n="footer_text">Designed & Developed by <span>Nguyễn Đình Bách (BackDEV)</span> · 2026</p>
+  </footer>
+
+  <div id="toast">✓ Tin nhắn đã được gửi thành công!</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="locales.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
