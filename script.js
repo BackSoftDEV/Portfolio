@@ -455,6 +455,24 @@ function showToast(msg) {
     animate();
 })();
 
+// ── Simulated Live Telemetry Ticker ───────────────────
+(function startTelemetryTicker() {
+    const latEl = document.getElementById('telemetry-latency');
+    const oeeEl = document.getElementById('hud-oee-val');
+    if (!latEl && !oeeEl) return;
+
+    setInterval(() => {
+        if (latEl) {
+            const lat = Math.floor(10 + Math.random() * 6);
+            latEl.textContent = lat + 'ms';
+        }
+        if (oeeEl) {
+            const oee = (94.4 + Math.random() * 0.8).toFixed(1);
+            oeeEl.textContent = oee;
+        }
+    }, 3200);
+})();
+
 // ── i18n & Typing animation ───────────────────────────
 let currentLang = localStorage.getItem('portfolio_lang') || 'vi';
 let phrases = (typeof phrasesByLang !== 'undefined' && phrasesByLang[currentLang]) ? phrasesByLang[currentLang] : [

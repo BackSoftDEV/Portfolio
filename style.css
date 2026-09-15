@@ -7,31 +7,33 @@
 }
 
 :root {
-    --bg: #070a13;
-    --bg2: #0c1220;
-    --bg3: #111a2e;
+    --bg: #090d16;
+    --bg2: #0e1626;
+    --bg3: #141f36;
     --neon: #00f0ff;
     --neon2: #2563eb;
     --neon3: #f59e0b;
+    --success: #10b981;
     --text: #e2e8f0;
-    --muted: #64748b;
-    --card: rgba(12, 18, 32, 0.75);
-    --border: rgba(0, 240, 255, 0.2);
-    --glow: 0 0 22px rgba(0, 240, 255, 0.35);
+    --muted: #8492a6;
+    --card: rgba(14, 22, 38, 0.75);
+    --border: rgba(0, 240, 255, 0.16);
+    --glow: 0 8px 32px rgba(0, 240, 255, 0.14);
 }
 
 .light {
     --bg: #f8fafc;
     --bg2: #ffffff;
-    --bg3: #e2e8f0;
+    --bg3: #edf2f7;
     --neon: #0284c7;
     --neon2: #2563eb;
     --neon3: #d97706;
+    --success: #059669;
     --text: #0f172a;
     --muted: #64748b;
-    --card: rgba(255, 255, 255, 0.9);
-    --border: rgba(37, 99, 235, 0.2);
-    --glow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    --card: rgba(255, 255, 255, 0.92);
+    --border: rgba(37, 99, 235, 0.18);
+    --glow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 .light nav {
@@ -98,11 +100,21 @@ html {
 
 body {
     background: var(--bg);
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+    background-size: 44px 44px;
     color: var(--text);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     cursor: none;
     overflow-x: hidden;
-    transition: background .4s, color .4s
+    transition: background .4s, color .4s;
+}
+
+body.light {
+    background-image: 
+        linear-gradient(rgba(37, 99, 235, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.025) 1px, transparent 1px);
 }
 
 /* Cursor */
@@ -418,7 +430,63 @@ nav {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 0 5%
+    padding: 0 5%;
+    max-width: 900px;
+}
+
+/* Telemetry Bar */
+.telemetry-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    background: rgba(14, 22, 38, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: .35rem 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .74rem;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeUp .8s ease both 2s;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.light .telemetry-bar {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+.telemetry-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    color: var(--success);
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+.telemetry-pulse {
+    width: 7px;
+    height: 7px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+.telemetry-dim {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.telemetry-sep {
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.light .telemetry-sep {
+    color: rgba(15, 23, 42, 0.15);
 }
 
 .hero-badge {
@@ -430,11 +498,11 @@ nav {
     border-radius: 99px;
     padding: .4rem 1rem;
     font-size: .78rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--neon);
-    letter-spacing: .1em;
-    margin-bottom: 1.5rem;
-    animation: fadeUp .8s ease both 2.2s
+    letter-spacing: .08em;
+    margin-bottom: 1.2rem;
+    animation: fadeUp .8s ease both 2.2s;
 }
 
 .hero-badge::before {
@@ -443,42 +511,42 @@ nav {
     height: 6px;
     background: var(--neon);
     border-radius: 50%;
-    animation: pulse 2s infinite
+    animation: pulse 2s infinite;
 }
 
 .hero-name {
-    font-size: clamp(3rem, 9vw, 8rem);
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
     font-weight: 900;
-    line-height: 1;
-    letter-spacing: -.02em;
-    animation: fadeUp .9s ease both 2.4s
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    animation: fadeUp .9s ease both 2.4s;
 }
 
 .hero-name span {
     background: linear-gradient(135deg, #fff 30%, var(--neon));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-name .last {
     background: linear-gradient(135deg, var(--neon), var(--neon2));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent
+    -webkit-text-fill-color: transparent;
 }
 
 .typing-wrap {
     height: 2.5rem;
     overflow: hidden;
-    margin: 1.2rem 0;
-    animation: fadeUp .8s ease both 2.6s
+    margin: 1rem 0;
+    animation: fadeUp .8s ease both 2.6s;
 }
 
 #typing-text {
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    font-weight: 400;
+    font-size: clamp(1rem, 2.2vw, 1.45rem);
+    font-weight: 500;
     color: var(--muted);
     font-family: 'JetBrains Mono', monospace;
-    letter-spacing: .02em
+    letter-spacing: .02em;
 }
 
 #typing-cursor {
@@ -488,28 +556,110 @@ nav {
     background: var(--neon);
     margin-left: 2px;
     vertical-align: middle;
-    animation: blink .8s infinite
+    animation: blink .8s infinite;
 }
 
 @keyframes blink {
-
-    0%,
-    100% {
-        opacity: 1
-    }
-
-    50% {
-        opacity: 0
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-bio {
-    font-size: clamp(.9rem, 1.5vw, 1.1rem);
+    font-size: clamp(.9rem, 1.4vw, 1.05rem);
     color: var(--muted);
-    max-width: 520px;
-    margin: 0 auto 2.5rem;
+    max-width: 680px;
+    margin: 0 auto 1.8rem;
     line-height: 1.7;
-    animation: fadeUp .8s ease both 2.8s
+    animation: fadeUp .8s ease both 2.8s;
+}
+
+/* Hero HUD Grid */
+.hero-hud-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 680px;
+    margin: 0 auto 2.2rem;
+    animation: fadeUp .8s ease both 2.9s;
+}
+
+.hud-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem .8rem;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.hud-item:hover {
+    border-color: var(--neon);
+    transform: translateY(-3px);
+    box-shadow: var(--glow);
+}
+
+.hud-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: .25rem;
+}
+
+.hud-value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text);
+    background: linear-gradient(135deg, #ffffff 40%, var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.light .hud-value {
+    background: linear-gradient(135deg, #0f172a 40%, var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hud-unit {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--neon);
+}
+
+.hud-sub {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-top: .25rem;
+}
+
+@media(max-width: 640px) {
+    .hero-hud-grid {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+    }
+}
+
+/* Spec Tag */
+.spec-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .15em;
+    color: var(--neon);
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: .3rem .8rem;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+}
+
+.light .spec-tag {
+    background: rgba(2, 132, 199, 0.08);
 }
 
 .hero-btns {
@@ -517,7 +667,7 @@ nav {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeUp .8s ease both 3s
+    animation: fadeUp .8s ease both 3s;
 }
 
 .btn-primary {
@@ -954,19 +1104,20 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0, 245, 255, .05), rgba(124, 58, 237, .05));
+    background: linear-gradient(135deg, rgba(0, 240, 255, .06), rgba(37, 99, 235, .06));
     opacity: 0;
-    transition: .3s
+    transition: .3s;
+    pointer-events: none;
 }
 
 .proj-card:hover {
     border-color: var(--neon);
-    box-shadow: 0 20px 60px rgba(0, 245, 255, .1);
-    transform: translateY(-8px)
+    box-shadow: 0 16px 48px rgba(0, 240, 255, .12);
+    transform: translateY(-8px);
 }
 
 .proj-card:hover::before {
-    opacity: 1
+    opacity: 1;
 }
 
 .proj-card-top {
