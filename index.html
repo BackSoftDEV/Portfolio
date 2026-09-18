@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
-
+<!-- npx -y serve . -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -21,6 +21,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -340,7 +342,7 @@
           <label data-i18n="form_msg_lbl">Nội dung</label>
           <textarea id="fmsg" placeholder="Mô tả dự án hoặc nội dung trao đổi..." data-i18n-ph="form_msg_ph"></textarea>
         </div>
-        <button class="btn-submit" onclick="submitForm()"><span data-i18n="form_btn">Gửi Tin Nhắn ✦</span></button>
+        <button class="btn-submit" id="fsubmit" onclick="submitForm()"><span data-i18n="form_btn">Gửi Tin Nhắn ✦</span></button>
       </div>
 
       <div class="contact-info-side">

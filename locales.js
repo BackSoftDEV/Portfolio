@@ -133,7 +133,10 @@ const i18nDict = {
             "Thiết kế & Phát triển bởi <span>Nguyễn Đình Bách (BackDEV)</span> · 2026",
 
         toast_success: "✓ Đã gửi tin nhắn thành công!",
-        toast_missing: "⚠ Vui lòng nhập đầy đủ thông tin"
+        toast_missing: "⚠ Vui lòng nhập đầy đủ thông tin",
+        toast_invalid_email: "⚠ Địa chỉ email không hợp lệ",
+        toast_sending: "⏳ Đang gửi tin nhắn...",
+        toast_error: "❌ Gửi tin nhắn thất bại, vui lòng thử lại sau!"
     },
 
     en: {
@@ -269,7 +272,10 @@ const i18nDict = {
             "Designed & Developed by <span>Nguyễn Đình Bách (BackDEV)</span> · 2026",
 
         toast_success: "✓ Message sent successfully!",
-        toast_missing: "⚠ Please fill in all required fields"
+        toast_missing: "⚠ Please fill in all required fields",
+        toast_invalid_email: "⚠ Invalid email address",
+        toast_sending: "⏳ Sending message...",
+        toast_error: "❌ Failed to send message, please try again later!"
     },
 
     ja: {
@@ -405,7 +411,10 @@ const i18nDict = {
             "Designed & Developed by <span>Nguyễn Đình Bách (BackDEV)</span> · 2026",
 
         toast_success: "✓ メッセージが送信されました！",
-        toast_missing: "⚠ 必須項目をすべて入力してください"
+        toast_missing: "⚠ 必須項目をすべて入力してください",
+        toast_invalid_email: "⚠ 有効なメールアドレスを入力してください",
+        toast_sending: "⏳ メッセージを送信中...",
+        toast_error: "❌ 送信に失敗しました。後でもう一度お試しください。"
     },
 
     zh: {
@@ -541,7 +550,10 @@ const i18nDict = {
             "Designed & Developed by <span>Nguyễn Đình Bách (BackDEV)</span> · 2026",
 
         toast_success: "✓ 信息发送成功！",
-        toast_missing: "⚠ 请填写所有必填项"
+        toast_missing: "⚠ 请填写所有必填项",
+        toast_invalid_email: "⚠ 请输入有效的邮箱地址",
+        toast_sending: "⏳ 正在发送信息...",
+        toast_error: "❌ 发送失败，请稍后重试！"
     }
 };
 

@@ -57,11 +57,16 @@ document.getElementById('mobileClose').onclick = () => closeMobile();
 function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
 
 // ── Toast ─────────────────────────────────────────────
-function showToast(msg) {
+let toastTimer = null;
+function showToast(msg, type = 'success') {
     const t = document.getElementById('toast');
+    if (!t) return;
     t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    t.className = 'show ' + (type ? 'toast-' + type : 'toast-success');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        t.className = '';
+    }, 3500);
 }
 
 // ── Starfield ───────────────────────────────────────────
@@ -757,20 +762,86 @@ function sendQuickByRole(role) {
     sendChat();
 }
 
-// ── Contact form ──────────────────────────────────────
-function submitForm() {
+// ── Contact form (Cloudflare Worker Proxy) ────────────
+const CONTACT_API_ENDPOINT = 'https://silent-fire-8123.nguyendinhbach99.workers.dev';
+
+async function submitForm() {
     const dict = (typeof i18nDict !== 'undefined' && i18nDict[currentLang]) 
         ? i18nDict[currentLang] 
         : (typeof i18nDict !== 'undefined' ? i18nDict.vi : {});
-    const n = document.getElementById('fname').value.trim();
-    const e = document.getElementById('femail').value.trim();
-    const m = document.getElementById('fmsg').value.trim();
-    if (!n || !e || !m) { showToast(dict.toast_missing || '⚠ Vui lòng nhập đầy đủ thông tin'); return; }
-    showToast(dict.toast_success || '✓ Đã gửi tin nhắn thành công!');
-    document.getElementById('fname').value = '';
-    document.getElementById('femail').value = '';
-    document.getElementById('fmsg').value = '';
+
+    const nameEl = document.getElementById('fname');
+    const emailEl = document.getElementById('femail');
+    const msgEl = document.getElementById('fmsg');
+    const submitBtn = document.getElementById('fsubmit');
+
+    const n = nameEl ? nameEl.value.trim() : '';
+    const e = emailEl ? emailEl.value.trim() : '';
+    const m = msgEl ? msgEl.value.trim() : '';
+
+    if (nameEl) nameEl.classList.remove('input-error');
+    if (emailEl) emailEl.classList.remove('input-error');
+    if (msgEl) msgEl.classList.remove('input-error');
+
+    if (!n || !e || !m) {
+        if (!n && nameEl) nameEl.classList.add('input-error');
+        if (!e && emailEl) emailEl.classList.add('input-error');
+        if (!m && msgEl) msgEl.classList.add('input-error');
+        showToast(dict.toast_missing || '⚠ Vui lòng nhập đầy đủ thông tin', 'warning');
+        return;
+    }
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(e)) {
+        if (emailEl) {
+            emailEl.classList.add('input-error');
+            emailEl.focus();
+        }
+        showToast(dict.toast_invalid_email || '⚠ Địa chỉ email không hợp lệ', 'error');
+        return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+    showToast(dict.toast_sending || '⏳ Đang gửi tin nhắn...', 'info');
+
+    try {
+        const response = await fetch(CONTACT_API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: n,
+                email: e,
+                message: m
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            showToast(dict.toast_success || '✓ Đã gửi tin nhắn thành công!', 'success');
+            if (nameEl) nameEl.value = '';
+            if (emailEl) emailEl.value = '';
+            if (msgEl) msgEl.value = '';
+        } else {
+            console.error('Contact error:', result);
+            showToast(dict.toast_error || '❌ Gửi tin nhắn thất bại, vui lòng thử lại sau!', 'error');
+        }
+    } catch (err) {
+        console.error('Submit form error:', err);
+        showToast(dict.toast_error || '❌ Gửi tin nhắn thất bại, vui lòng thử lại sau!');
+    } finally {
+        if (submitBtn) submitBtn.disabled = false;
+    }
 }
+
+// Xóa viền đỏ khi người dùng gõ vào ô nhập
+['fname', 'femail', 'fmsg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => el.classList.remove('input-error'));
+});
 
 // ── i18n Engine ───────────────────────────────────────
 function applyLanguage(lang) {
