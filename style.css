@@ -61,11 +61,16 @@ html {
     overflow-x: hidden
 }
 
+*,
+*::before,
+*::after {
+    cursor: none !important;
+}
+
 body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-    cursor: none;
     overflow-x: hidden;
     transition: background .4s, color .4s;
 }
@@ -125,13 +130,13 @@ body {
     opacity: .5;
 }
 
-body:has(a:hover, button:hover) #cursor {
+body:has(a:hover, button:hover, select:hover, [onclick]:hover, .skill-tab:hover, .cdot:hover, .chat-quick-tag:hover) #cursor {
     width: 18px;
     height: 18px;
     opacity: .8;
 }
 
-body:has(a:hover, button:hover) #cursor-ring {
+body:has(a:hover, button:hover, select:hover, [onclick]:hover, .skill-tab:hover, .cdot:hover, .chat-quick-tag:hover) #cursor-ring {
     width: 48px;
     height: 48px;
     opacity: .25;
@@ -862,250 +867,8 @@ section {
    ABOUT
    ═══════════════════════════════════════════════════════ */
 .about-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 3.5rem;
-    align-items: center;
-}
-
-/* ═══════════════════════════════════════════════════════
-   3D MULTI-LAYER BACH IDENTITY PLATE
-   ═══════════════════════════════════════════════════════ */
-.about-card-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.bach-card-wrap {
-    perspective: 1200px;
-    width: 100%;
-    max-width: 440px;
-    display: flex;
-    justify-content: center;
-}
-
-.bach-card-3d {
-    --gold: #d4b26f;
-    --gold-bright: #fcedcb;
-    --gold-glow: rgba(212, 178, 111, 0.35);
-    position: relative;
-    width: 100%;
-    border-radius: var(--radius-lg);
-    background: radial-gradient(ellipse at 50% 25%, #0d1527 0%, #050811 100%);
-    border: 1px solid rgba(212, 178, 111, 0.3);
-    padding: 2.2rem 1.6rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.4rem;
-    transform-style: preserve-3d;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 178, 111, 0.12);
-    cursor: grab;
-    will-change: transform;
-    transition: box-shadow 0.35s ease, border-color 0.35s ease;
-    overflow: hidden;
-}
-
-.bach-card-3d:active {
-    cursor: grabbing;
-}
-
-.bach-card-wrap:hover .bach-card-3d {
-    border-color: rgba(212, 178, 111, 0.7);
-    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.9), 0 0 45px rgba(212, 178, 111, 0.28);
-}
-
-.light .bach-card-3d {
-    background: radial-gradient(ellipse at 50% 25%, #1f293d 0%, #0f172a 100%);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 25px rgba(212, 178, 111, 0.2);
-}
-
-/* Glare & Reflection */
-.bach-card-glare {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9;
-    border-radius: inherit;
-    opacity: 0;
-    background: radial-gradient(circle 320px at var(--gx, 50%) var(--gy, 50%), rgba(255, 238, 185, 0.35) 0%, rgba(212, 178, 111, 0.12) 40%, transparent 75%);
-    mix-blend-mode: screen;
-    transition: opacity 0.3s ease;
-}
-
-.bach-card-wrap:hover .bach-card-glare {
-    opacity: 1;
-}
-
-/* Corner Plate Accents */
-.plate-corner {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border: 1.5px solid rgba(212, 178, 111, 0.45);
-    pointer-events: none;
-}
-.tc-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
-.tc-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
-.tc-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
-.tc-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
-
-.bach-card-border {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 1px solid rgba(212, 178, 111, 0.15);
-    pointer-events: none;
-    z-index: 8;
-}
-
-/* ── 3D Layer 2: Crown ─────────────────────────────── */
-.bach-layer-crown {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    transform: translateZ(36px);
-}
-
-.bach-crown-svg {
-    width: 165px;
-    height: 96px;
-    color: var(--gold);
-    filter: drop-shadow(0 0 10px var(--gold-glow));
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.bach-card-wrap:hover .bach-crown-svg {
-    filter: drop-shadow(0 0 16px rgba(252, 237, 203, 0.55));
-    transform: scale(1.03);
-}
-
-/* ── 3D Layer 3: Periodic Tiles ────────────────────── */
-.bach-layer-tiles {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    width: 100%;
-    transform: translateZ(52px);
-}
-
-.p-tile {
-    position: relative;
-    border: 1.6px solid var(--gold);
-    border-radius: 9px;
-    background: rgba(10, 16, 28, 0.82);
-    padding: 7px 6px 6px 7px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    aspect-ratio: 1 / 1.08;
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.65), inset 0 0 12px rgba(212, 178, 111, 0.08);
-    transform-style: preserve-3d;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    cursor: default;
-}
-
-.p-tile:hover {
-    transform: translateZ(14px);
-    border-color: var(--gold-bright);
-    box-shadow: 0 8px 22px rgba(212, 178, 111, 0.35), inset 0 0 16px rgba(212, 178, 111, 0.18);
-}
-
-.p-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-    transform: translateZ(10px);
-}
-
-.p-symbol {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 3.5vw, 2.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    text-align: center;
-    color: var(--gold-bright);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85), 0 0 15px var(--gold-glow);
-    transform: translateZ(24px);
-    margin: 3px 0 1px;
-}
-
-.p-sub {
-    font-size: 0.52em;
-    font-weight: 700;
-    margin-left: 1px;
-    vertical-align: baseline;
-}
-
-.p-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.15;
-    transform: translateZ(10px);
-}
-
-.p-name {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.44rem;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    color: var(--gold);
-    opacity: 0.92;
-}
-
-.p-mass {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.44rem;
-    font-weight: 600;
-    color: var(--gold);
-    opacity: 0.75;
-}
-
-/* ── 3D Layer 4: Birthdate ─────────────────────────── */
-.bach-layer-date {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.92rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-shadow: 0 0 12px var(--gold-glow);
-    transform: translateZ(38px);
-    width: 100%;
-}
-
-.date-diamond {
-    font-size: 0.85rem;
-    opacity: 0.85;
-}
-
-/* ── 3D Layer 5: Fleur-de-lis ──────────────────────── */
-.bach-layer-fleur {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    transform: translateZ(32px);
-}
-
-.bach-fleur-svg {
-    width: 46px;
-    height: 50px;
-    color: var(--gold);
-    filter: drop-shadow(0 0 8px var(--gold-glow));
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.bach-card-wrap:hover .bach-fleur-svg {
-    filter: drop-shadow(0 0 14px rgba(252, 237, 203, 0.5));
-    transform: scale(1.05);
+    max-width: 860px;
+    margin: 0 auto;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1324,6 +1087,10 @@ section {
     text-align: center;
     transition: .3s;
     line-height: 1.4;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .skill-chip:hover .skill-name {
@@ -1348,7 +1115,7 @@ section {
     display: flex;
     align-items: center;
     gap: .6rem;
-    margin-top: .2rem;
+    margin-top: auto;
 }
 
 .skill-level {
@@ -2239,38 +2006,6 @@ footer span {
 }
 
 @media (max-width: 480px) {
-    .bach-card-3d {
-        padding: 1.6rem 1rem 1.4rem;
-        gap: 1rem;
-    }
-
-    .bach-crown-svg {
-        width: 130px;
-        height: 76px;
-    }
-
-    .p-tile {
-        padding: 5px 3px 5px 4px;
-        border-radius: 7px;
-    }
-
-    .p-symbol {
-        font-size: 1.6rem;
-    }
-
-    .p-num {
-        font-size: 0.65rem;
-    }
-
-    .p-name, .p-mass {
-        font-size: 0.38rem;
-    }
-
-    .bach-layer-date {
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
-    }
-
     .hero-btns {
         flex-direction: column;
     }
