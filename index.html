@@ -62,7 +62,7 @@
 
   <!-- Nav -->
   <nav id="main-nav">
-    <div class="nav-logo">&lt;BackDEV /&gt;</div>
+    <a href="#" class="nav-logo">&lt;BackDEV /&gt;</a>
     <ul class="nav-links">
       <li><a href="#about" data-i18n="nav_about">Giới thiệu</a></li>
       <li><a href="#skills" data-i18n="nav_skills">Kỹ năng</a></li>
@@ -161,33 +161,129 @@
     </div>
 
     <div class="about-layout reveal">
-      <div class="about-quote-block">
-        <div class="quote-mark">"</div>
-        <p class="about-quote" data-i18n="about_quote">"Tôi thiết kế <strong>kiến trúc Microservices &
-            Monorepo</strong>, làm chủ <strong>dữ liệu thời gian thực (IoT, Socket.IO, gRPC)</strong> và trực quan hóa
-          nhà xưởng thông minh <strong>SCADA 3D với Three.js</strong>."</p>
+      <!-- 3D Multi-Layer Bach Identity Plate -->
+      <div class="about-card-col">
+        <div class="bach-card-wrap" id="bachCardWrap">
+          <div class="bach-card-3d" id="bachCard3D">
+            <div class="bach-card-glare" id="bachCardGlare"></div>
+            
+            <!-- Layer 1: Base Tech Accents -->
+            <div class="plate-corner tc-tl"></div>
+            <div class="plate-corner tc-tr"></div>
+            <div class="plate-corner tc-bl"></div>
+            <div class="plate-corner tc-br"></div>
+
+            <!-- Layer 2: Crown (Gold Vector) -->
+            <div class="bach-layer bach-layer-crown">
+              <svg class="bach-crown-svg" viewBox="0 0 240 140" fill="none">
+                <!-- Cross pattée -->
+                <path d="M120 4 L120 22 M111 13 L129 13 M114 4 L126 4 M114 22 L126 22 M111 8 L111 18 M129 8 L129 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Crown Body Contour -->
+                <path d="M36 112 C30 92 22 62 30 48 C34 38 48 48 52 56 C58 46 68 32 78 38 C86 44 94 62 102 62 C108 44 114 26 120 22 C126 26 132 44 138 62 C146 62 154 44 162 38 C172 32 182 46 188 56 C192 48 206 38 210 48 C218 62 210 92 204 112 Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                <!-- Crown Base Bands -->
+                <path d="M36 112 Q120 126 204 112" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M33 120 Q120 134 207 120" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <!-- 3 Diamonds -->
+                <polygon points="120,52 129,67 120,82 111,67" stroke="currentColor" stroke-width="2.2" fill="none"/>
+                <polygon points="78,58 85,70 78,82 71,70" stroke="currentColor" stroke-width="2" fill="none"/>
+                <polygon points="162,58 169,70 162,82 155,70" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+
+            <!-- Layer 3: Periodic Element Tiles (B - Ac - C - H) -->
+            <div class="bach-layer bach-layer-tiles">
+              <div class="p-tile">
+                <div class="p-num">5</div>
+                <div class="p-symbol">B</div>
+                <div class="p-meta">
+                  <span class="p-name">BORIUM</span>
+                  <span class="p-mass">10.81</span>
+                </div>
+              </div>
+
+              <div class="p-tile">
+                <div class="p-num">89</div>
+                <div class="p-symbol">A<span class="p-sub">c</span></div>
+                <div class="p-meta">
+                  <span class="p-name">ACTINIUM</span>
+                  <span class="p-mass">(227)</span>
+                </div>
+              </div>
+
+              <div class="p-tile">
+                <div class="p-num">6</div>
+                <div class="p-symbol">C</div>
+                <div class="p-meta">
+                  <span class="p-name">CARBONIUM</span>
+                  <span class="p-mass">12.011</span>
+                </div>
+              </div>
+
+              <div class="p-tile">
+                <div class="p-num">1</div>
+                <div class="p-symbol">H</div>
+                <div class="p-meta">
+                  <span class="p-name">HYDROGENIUM</span>
+                  <span class="p-mass">1.008</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Layer 4: Birthdate -->
+            <div class="bach-layer bach-layer-date">
+              <span class="date-diamond">◇</span>
+              <span class="date-text">17 - 01 - 2004</span>
+              <span class="date-diamond">◇</span>
+            </div>
+
+            <!-- Layer 5: Fleur-de-lis (Gold Vector) -->
+            <div class="bach-layer bach-layer-fleur">
+              <svg class="bach-fleur-svg" viewBox="0 0 100 110" fill="none">
+                <path d="M50 12 C57 32 62 52 50 78 C38 52 43 32 50 12 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M45 52 C28 36 8 45 14 66 C20 80 38 75 44 78" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M42 78 C32 82 22 88 18 98" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M55 52 C72 36 92 45 86 66 C80 80 62 75 56 78" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M58 78 C68 82 78 88 82 98" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M28 78 Q50 82 72 78" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <path d="M50 78 L50 104 M43 92 L50 104 L57 92" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="bach-card-border"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="about-body">
-        <p class="about-p" data-i18n="about_p1">Tôi chịu trách nhiệm chính về kiến trúc và phát triển các hệ thống số
-          hóa sản xuất quy mô lớn cho các đối tác công nghiệp hàng đầu như Fujikin Thăng Long, Meiko, Gunze...</p>
-        <p class="about-p" data-i18n="about_p2">Định hướng kỹ thuật tập trung vào hiệu năng cao, tối ưu hóa bộ nhớ đệm
-          (Redis, IndexedDB), khả năng mở rộng linh hoạt của dịch vụ và đem đến trải nghiệm người dùng trực quan, chính
-          xác cho hệ thống điều hành sản xuất.</p>
-      </div>
+      <!-- About Information -->
+      <div class="about-content-col">
+        <div class="about-quote-block">
+          <div class="quote-mark">"</div>
+          <p class="about-quote" data-i18n="about_quote">"Tôi thiết kế <strong>kiến trúc Microservices &
+              Monorepo</strong>, làm chủ <strong>dữ liệu thời gian thực (IoT, Socket.IO, gRPC)</strong> và trực quan hóa
+            nhà xưởng thông minh <strong>SCADA 3D với Three.js</strong>."</p>
+        </div>
 
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">2+</div>
-          <div class="stat-label" data-i18n="stat_exp">Năm kinh nghiệm</div>
+        <div class="about-body">
+          <p class="about-p" data-i18n="about_p1">Tôi chịu trách nhiệm chính về kiến trúc và phát triển các hệ thống số
+            hóa sản xuất quy mô lớn cho các đối tác công nghiệp hàng đầu như Fujikin Thăng Long, Meiko, Gunze...</p>
+          <p class="about-p" data-i18n="about_p2">Định hướng kỹ thuật tập trung vào hiệu năng cao, tối ưu hóa bộ nhớ đệm
+            (Redis, IndexedDB), khả năng mở rộng linh hoạt của dịch vụ và đem đến trải nghiệm người dùng trực quan, chính
+            xác cho hệ thống điều hành sản xuất.</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">6+</div>
-          <div class="stat-label" data-i18n="stat_proj">Dự án công nghiệp</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">20+</div>
-          <div class="stat-label" data-i18n="stat_tech">Công nghệ nòng cốt</div>
+
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">2+</div>
+            <div class="stat-label" data-i18n="stat_exp">Năm kinh nghiệm</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">6+</div>
+            <div class="stat-label" data-i18n="stat_proj">Dự án công nghiệp</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">20+</div>
+            <div class="stat-label" data-i18n="stat_tech">Công nghệ nòng cốt</div>
+          </div>
         </div>
       </div>
     </div>

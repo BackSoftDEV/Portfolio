@@ -473,7 +473,7 @@ function showToast(msg, type = 'success') {
             masterGroup.rotation.y += (targetRotY - masterGroup.rotation.y) * 0.08;
         } else {
             masterGroup.rotation.x += (Math.sin(time * 0.6) * 0.2 - masterGroup.rotation.x) * 0.04;
-            masterGroup.rotation.y += (time * 0.2 - masterGroup.rotation.y) * 0.04;
+            masterGroup.rotation.y += (Math.sin(time * 0.4) * 0.3 - masterGroup.rotation.y) * 0.04;
         }
 
         renderer.render(scene, camera);
@@ -890,6 +890,94 @@ applyLanguage(currentLang);
 window.addEventListener('scroll', () => {
     document.querySelector('nav').style.height = window.scrollY > 60 ? '52px' : '64px';
 });
+
+// ── Bach 3D Parallax Tilt Card (Multi-layer) ───────────────
+(function initBachCard3D() {
+    const wrap = document.getElementById('bachCardWrap');
+    const card = document.getElementById('bachCard3D');
+    const glare = document.getElementById('bachCardGlare');
+    if (!wrap || !card) return;
+
+    let bounds = null;
+    let isHovered = false;
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let rafId = null;
+
+    function renderLoop() {
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+
+        const scale = isHovered ? 1.03 : 1;
+        card.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) scale3d(${scale}, ${scale}, 1)`;
+
+        if (isHovered || Math.abs(currentX) > 0.05 || Math.abs(currentY) > 0.05) {
+            rafId = requestAnimationFrame(renderLoop);
+        } else {
+            card.style.transform = '';
+            rafId = null;
+        }
+    }
+
+    function handlePointer(clientX, clientY) {
+        if (!bounds) bounds = wrap.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (clientX - bounds.left) / bounds.width));
+        const y = Math.max(0, Math.min(1, (clientY - bounds.top) / bounds.height));
+
+        // Tilt angle up to ±18 degrees
+        targetX = (0.5 - y) * 26;
+        targetY = (x - 0.5) * 26;
+
+        if (glare) {
+            glare.style.setProperty('--gx', `${(x * 100).toFixed(1)}%`);
+            glare.style.setProperty('--gy', `${(y * 100).toFixed(1)}%`);
+        }
+
+        if (!rafId) {
+            rafId = requestAnimationFrame(renderLoop);
+        }
+    }
+
+    wrap.addEventListener('mouseenter', () => {
+        bounds = wrap.getBoundingClientRect();
+        isHovered = true;
+        if (!rafId) rafId = requestAnimationFrame(renderLoop);
+    });
+
+    wrap.addEventListener('mousemove', (e) => {
+        handlePointer(e.clientX, e.clientY);
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetX = 0;
+        targetY = 0;
+        bounds = null;
+    });
+
+    // Touch support for mobile devices
+    wrap.addEventListener('touchstart', (e) => {
+        bounds = wrap.getBoundingClientRect();
+        isHovered = true;
+        if (e.touches && e.touches[0]) {
+            handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+            handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+
+    wrap.addEventListener('touchend', () => {
+        isHovered = false;
+        targetX = 0;
+        targetY = 0;
+        bounds = null;
+    });
+})();
+
 console.log(`
 ██████╗  █████╗  ██████╗██╗  ██╗██████╗ ███████╗██╗   ██╗
 ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔════╝██║   ██║
